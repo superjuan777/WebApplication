@@ -74,41 +74,31 @@ namespace webapi.Controllers
             return NoContent();
         }
         
-         [HttpPost]
-        public IActionResult EnviarEmail()
+          [HttpPost]
+        public IActionResult EnviarEmail(Book em)
         {
-            string emailDestinatario = "pcliente836@gmail.com";
-            SendMail(emailDestinatario);
+            string to = (string)em.email;
+            string men = (string)em.mensaje;
+            string sub = (string)em.cliente;
+          
+            MailMessage _mailMessage = new MailMessage();
+
+            _mailMessage.From = new MailAddress("pcliente836@gmail.com");
+
+            _mailMessage.CC.Add(to);
+            _mailMessage.Subject = sub;
+            _mailMessage.IsBodyHtml = true;
+            _mailMessage.Body = "Señor cliente " + sub + men;
+
+            SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32("587"));
+
+            _smtpClient.UseDefaultCredentials = false;
+            _smtpClient.Credentials = new NetworkCredential("pcliente836@gmail.com", "monolegal");
+            _smtpClient.EnableSsl = true;
+            _smtpClient.Send(_mailMessage);
+
             return RedirectToAction("Index");
-        }
 
-        public bool SendMail(string email)
-        {
-            try
-            {
-                MailMessage _mailMessage = new MailMessage();
-
-                _mailMessage.From = new MailAddress("pcliente836@gmail.com");
-
-                _mailMessage.CC.Add(email);
-                _mailMessage.Subject = "Estado cuenta Monolegal";
-                _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = "<b>Aviso infromacion factura monolegal</b><p>se le informa que su cuenta se encuentra en mora por favor cancelar factura</p>";
-
-                SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32("587"));
-
-                _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("pcliente836@gmail.com", "monolegal");
-                _smtpClient.EnableSsl = true;
-                _smtpClient.Send(_mailMessage);
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
     }
 }
