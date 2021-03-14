@@ -66,6 +66,10 @@ namespace webapi.Models
         [BsonElement("email")]
         [JsonProperty("email")]
         public object email { get; set; }
+        
+        [BsonElement("mensaje")]
+        [JsonProperty("mensaje")]
+        public object mensaje { get; set; }
     }
        
 }
