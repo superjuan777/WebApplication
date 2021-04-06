@@ -76,13 +76,15 @@ namespace webapi.Controllers
             return NoContent();
         }
         
-          [HttpPost]
+         [HttpPost]
         public IActionResult EnviarEmail(Book em)
         {
             string to = (string)em.email;
             string men = (string)em.mensaje;
             string sub = (string)em.cliente;
-          
+            string tot = (string)em.totalfactura;
+
+
             MailMessage _mailMessage = new MailMessage();
 
             _mailMessage.From = new MailAddress("pcliente836@gmail.com");
@@ -90,8 +92,10 @@ namespace webapi.Controllers
             _mailMessage.CC.Add(to);
             _mailMessage.Subject = sub;
             _mailMessage.IsBodyHtml = true;
+            if(tot == null)
             _mailMessage.Body = "Señor cliente " + sub + men;
-
+            else
+             _mailMessage.Body = "Señor cliente " + sub + men + tot;
             SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32("587"));
 
             _smtpClient.UseDefaultCredentials = false;
