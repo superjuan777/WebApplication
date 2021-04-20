@@ -92,7 +92,7 @@ namespace webapi.Controllers
             _mailMessage.CC.Add(to);
             _mailMessage.Subject = sub;
             _mailMessage.IsBodyHtml = true;
-            if(tot == null)
+            if(tot == "0")
             _mailMessage.Body = "Señor cliente " + sub + men;
             else
              _mailMessage.Body = "Señor cliente " + sub + men + tot;
