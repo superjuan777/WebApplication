@@ -82,7 +82,7 @@ namespace webapi.Controllers
             string to = (string)em.email;
             string men = (string)em.mensaje;
             string sub = (string)em.cliente;
-            string tot = (string)em.totalfactura;
+            int tot = (int)em.totalfactura;
 
 
             MailMessage _mailMessage = new MailMessage();
@@ -92,7 +92,7 @@ namespace webapi.Controllers
             _mailMessage.CC.Add(to);
             _mailMessage.Subject = sub;
             _mailMessage.IsBodyHtml = true;
-            if(tot == "0")
+            if(tot == 0)
             _mailMessage.Body = "Señor cliente " + sub + men;
             else
              _mailMessage.Body = "Señor cliente " + sub + men + tot;
