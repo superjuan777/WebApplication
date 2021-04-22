@@ -61,7 +61,7 @@ namespace webapi.Models
 
         [BsonElement("totalfactura")]
         [JsonProperty("totalfactura")]
-        public int Totalfactura { get; set; }
+        public int totalfactura { get; set; }
         
         [BsonElement("email")]
         [JsonProperty("email")]
