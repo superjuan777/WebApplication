@@ -82,7 +82,7 @@ namespace webapi.Controllers
             string to = (string)em.email;
             string men = (string)em.mensaje;
             string sub = (string)em.cliente;
-            int tot = (int)em.totalfactura;
+            int tot = em.totalfactura;
 
 
             MailMessage _mailMessage = new MailMessage();
