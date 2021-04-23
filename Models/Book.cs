@@ -46,6 +46,10 @@ namespace webapi.Models
         [BsonElement("nit")]
         [JsonProperty("nit")]
         public object nit { get; set; }
+        
+        [BsonElement("por")]
+        [JsonProperty("por")]
+        public object por { get; set; }
 
         [BsonElement("pagada")]
         [JsonProperty("pagada")]
