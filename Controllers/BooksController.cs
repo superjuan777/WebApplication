@@ -38,17 +38,19 @@ namespace webapi.Controllers
             return book;
         }
 
-        //[HttpPost]
-       // public ActionResult<Book> Create(Book book)
-        //{
-           // _bookService.Create(book);
+        [HttpPost]
+        public ActionResult<Book> Create(Book book)
+         {
+           _bookService.Create(book);
 
-           // return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
-        //}
+           return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
+         }
 
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, Book em)
         {
+            Book oRespuesta = new Book();
+
             var book = _bookService.Get(id);
 
             if (book == null)
@@ -84,6 +86,7 @@ namespace webapi.Controllers
             try  
             {
                 _smtpClient.Send(_mailMessage);
+                oRespuesta.Exito = 1;
                 _bookService.Update(id, em);
             }
             catch(Exception e)
@@ -91,7 +94,7 @@ namespace webapi.Controllers
                 Console.WriteLine(e);
             }
 
-            return NoContent();
+            return Ok(oRespuesta);
         }
 
         [HttpDelete("{id:length(24)}")]

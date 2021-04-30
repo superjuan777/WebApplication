@@ -74,6 +74,13 @@ namespace webapi.Models
         [BsonElement("mensaje")]
         [JsonProperty("mensaje")]
         public object mensaje { get; set; }
+
+        public int Exito { get; set; }
+
+        public Book()
+        {
+            this.Exito = 0;
+        }
     }
        
 }
